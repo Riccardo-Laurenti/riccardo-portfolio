@@ -39,22 +39,20 @@ export default function HeroSection() {
         img.classList.add("gsap-visible");
         const direction = index % 2 === 0 ? 1 : -1;
         const distance = 60;
-       gsap.fromTo(
-        img,
-        { y: -distance * direction },
-        {
-          y: distance * direction,
-          ease: "power1.out",  
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,            
-            anticipatePin: 1,
-          },
-        }
-      );
-
+        gsap.fromTo(
+          img,
+          { y: -distance * direction },
+          {
+            y: distance * direction,
+            ease: "none",
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
       });
 
       ScrollTrigger.refresh();
@@ -163,6 +161,7 @@ export default function HeroSection() {
     <section
       ref={heroRef}
       className="hero"
+      style={{ position: "relative", overflow: "hidden", height: "100vh" }}
     >
 
       <canvas id="hero-canvas" ref={canvasRef} />
