@@ -305,16 +305,13 @@ nav a{color: white; text-decoration: none;}
 .horizontal-sliders {
   display: flex;
   flex-wrap: nowrap;
-  width: max-content;
-  overflow-x: hidden;
-
+  height: 100vh;
 }
 
 .slide {
-  flex: 0 0 100vw;
-  height: 100vh;          
-  position: relative;    
-  overflow: hidden;      
+  flex: 0 0 100vw;   /* ogni slide = larghezza viewport */
+  height: 100vh;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -322,8 +319,11 @@ nav a{color: white; text-decoration: none;}
 
 
 .portfolio-image {
-  object-fit: cover;      
+  object-fit: cover;
 }
+
+
+
 
 
 

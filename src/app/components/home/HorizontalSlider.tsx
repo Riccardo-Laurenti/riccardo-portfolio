@@ -7,6 +7,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { urlFor } from "../../lib/client"; 
 import { Project } from "../../types/project";
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 
@@ -26,7 +27,8 @@ export default function HorizontalSlider({ projects }: { projects: Project[] }) 
           trigger: sliderRef.current,
           pin: mainRef.current,
           scrub: 1,
-          end: "+=3000",
+          end: () => "+=" + (sliderRef.current?.scrollWidth || 0), // dinamico
+          invalidateOnRefresh: true,
         },
       });
     }, mainRef);
@@ -44,7 +46,7 @@ export default function HorizontalSlider({ projects }: { projects: Project[] }) 
                 src={urlFor(project.mainImage).url()}
                 alt={project.title}
                 fill
-                sizes="(max-width: 768px) 100vw, 100vw"
+                sizes="100vw"
                 className="portfolio-image"
               />
             )}
