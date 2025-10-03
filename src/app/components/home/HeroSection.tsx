@@ -114,13 +114,16 @@ export default function HeroSection() {
     const particles = new THREE.Points(geometry, material);
     scene.add(particles);
 
-    const onWindowResize = () => {
-      const newWidth = window.innerWidth;
-      const newHeight = document.documentElement.clientHeight; // 👈 meglio di innerHeight su mobile
-      camera.aspect = newWidth / newHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(newWidth, newHeight);
-    };
+  const onWindowResize = () => {
+  if (window.innerWidth > 768) { // 👈 aggiorna solo su desktop
+    const newWidth = window.innerWidth;
+    const newHeight = document.documentElement.clientHeight;
+    camera.aspect = newWidth / newHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(newWidth, newHeight);
+  }
+};
+
     window.addEventListener("resize", onWindowResize);
 
     const animate = () => {
