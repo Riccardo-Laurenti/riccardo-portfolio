@@ -1,7 +1,15 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "*": ["src/*"]
     }
-  }
+  },
+  "include": ["src", "studio/sanity.config.ts", "src/app/types"]
 }
