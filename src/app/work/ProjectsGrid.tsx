@@ -16,7 +16,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 2 }}
       className="gridContainer"
     >
       {projects.map((project) => (
