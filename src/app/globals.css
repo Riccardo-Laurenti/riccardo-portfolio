@@ -259,6 +259,9 @@ nav a{color: white; text-decoration: none;}
   .hero-title {
     font-size: 1.4rem;
   }
+  .horizontal-sliders {
+  height: 100dvh;
+}
 }
 
 .main {
@@ -309,7 +312,8 @@ nav a{color: white; text-decoration: none;}
 }
 
 .slide {
-  flex: 0 0 100vw;   /* ogni slide = larghezza viewport */
+  will-change: transform;
+  flex: 0 0 100vw;  
   height: 100vh;
   position: relative;
   display: flex;

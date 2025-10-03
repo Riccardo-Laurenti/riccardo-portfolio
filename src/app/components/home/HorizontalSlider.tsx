@@ -22,17 +22,16 @@ export default function HorizontalSlider({ projects }: { projects: Project[] }) 
 
       gsap.to(sections, {
         xPercent: -100 * (sections.length - 1),
-        ease: "none",
-        
+        ease: "none",  
         scrollTrigger: {
-  trigger: sliderRef.current,
-  pin: mainRef.current,
-  scrub: 1,
-  pinSpacing: true,
-  end: () => "+=" + (window.innerWidth * sections.length),
-  invalidateOnRefresh: true,
-}
-,
+        trigger: sliderRef.current,
+        pin: mainRef.current,
+        scrub: 1,
+        pinSpacing: true,
+        anticipatePin: 1,          
+        end: () => "+=" + sliderRef.current!.offsetWidth, 
+        invalidateOnRefresh: true,  
+    },
       });
     }, mainRef);
 
@@ -51,6 +50,7 @@ export default function HorizontalSlider({ projects }: { projects: Project[] }) 
                 fill
                 sizes="100vw"
                 className="portfolio-image"
+                quality={80}
               />
             )}
           </div>
