@@ -23,13 +23,16 @@ export default function HorizontalSlider({ projects }: { projects: Project[] }) 
       gsap.to(sections, {
         xPercent: -100 * (sections.length - 1),
         ease: "none",
+        
         scrollTrigger: {
-          trigger: sliderRef.current,
-          pin: mainRef.current,
-          scrub: 1,
-          end: () => "+=" + (sliderRef.current?.scrollWidth || 0), // dinamico
-          invalidateOnRefresh: true,
-        },
+  trigger: sliderRef.current,
+  pin: mainRef.current,
+  scrub: 1,
+  pinSpacing: true,
+  end: () => "+=" + (window.innerWidth * sections.length),
+  invalidateOnRefresh: true,
+}
+,
       });
     }, mainRef);
 
