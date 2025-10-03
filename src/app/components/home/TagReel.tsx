@@ -18,7 +18,7 @@ export default function TagReel({
 
     rows.forEach((row, i) => {
       const distance = row.offsetWidth / 2; // metà della row, perché è duplicata
-      const speed = 150; // pixel per secondo → regola qui
+      const speed = 120; // pixel per secondo → regola qui
 
       gsap.to(row, {
         x: -distance,

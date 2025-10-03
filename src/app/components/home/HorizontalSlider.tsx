@@ -16,27 +16,29 @@ export default function HorizontalSlider({ projects }: { projects: Project[] }) 
   const mainRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const sections = gsap.utils.toArray<HTMLElement>(".slide");
+useEffect(() => {
+  const ctx = gsap.context(() => {
+    if (!sliderRef.current) return;
 
-      gsap.to(sections, {
-        xPercent: -100 * (sections.length - 1),
-        ease: "power1.out",
-        scrollTrigger: {
+    const totalWidth = sliderRef.current.scrollWidth - window.innerWidth;
+
+    gsap.to(sliderRef.current, {
+      x: -totalWidth,
+      ease: "none", // 👈 nessun easing, sync perfetto con lo scroll
+      scrollTrigger: {
         trigger: sliderRef.current,
         pin: mainRef.current,
-        scrub: 1,
-        pinSpacing: true,
-        anticipatePin: 1,          
-        end: () => "+=" + (window.innerWidth * sections.length),
-        invalidateOnRefresh: true,  
-    },
-      });
-    }, mainRef);
+        scrub: 0.3, 
+        anticipatePin: 1,
+        end: () => "+=" + totalWidth,
+        invalidateOnRefresh: true,
+      },
+    });
+  }, mainRef);
 
-    return () => ctx.revert();
-  }, []);
+  return () => ctx.revert();
+}, []);
+
 
   return (
     <div ref={mainRef}>

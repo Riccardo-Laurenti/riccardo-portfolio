@@ -301,10 +301,10 @@ nav a{color: white; text-decoration: none;}
 
 /* HORIZONTAL SLIDER */
 
-.horizontal-sliders {
+/* .horizontal-sliders {
   display: flex;
   flex-wrap: nowrap;
-  height: 100vh;
+  height: 100svh;
 }
 
 .slide {
@@ -316,8 +316,30 @@ nav a{color: white; text-decoration: none;}
 
 .portfolio-image {
   object-fit: cover;
+} */
+
+.horizontal-sliders {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100svh; /* più stabile su mobile */
 }
 
+.slide {
+  position: relative; /* necessario per Next/Image fill */
+  width: 100vw;
+  height: 100svh;
+  flex: 0 0 auto;
+  overflow: hidden;
+  will-change: transform;
+  backface-visibility: hidden; /* evita tearing su Safari */
+}
+
+.portfolio-image {
+  object-fit: cover;
+  transform: translate3d(0,0,0); /* forza GPU */
+  backface-visibility: hidden;
+  will-change: transform;
+}
 
 
 /* MEDIA TEXT */
@@ -396,7 +418,7 @@ nav a{color: white; text-decoration: none;}
 
 .cb-tagreel-content { padding: 4rem 0; }
 
- .cb-tagreel-items { overflow: hidden;position: relative; } 
+ .cb-tagreel-items { overflow: hidden;} 
 
  .cb-tagreel-row {
   display: flex;
@@ -405,7 +427,6 @@ nav a{color: white; text-decoration: none;}
   width: max-content;
   transform: translate3d(0,0,0); 
   will-change: transform;
-  backface-visibility: hidden;
 }
 
  .cb-tagreel-item { flex: 0 0 auto; padding: 1rem 3rem; font-size: clamp(1.5rem, 3vw, 2.5rem); text-transform: uppercase; font-weight: 600; }
