@@ -128,26 +128,26 @@ export default function HeroSection() {
       tl.from(".img-4", { y: 200, rotate: 10, opacity: 0, scale: 0.9 }, "-=1.2");
 
       // Parallax immagini
-      document.querySelectorAll(".img").forEach((img, index) => {
-        const direction = index % 2 === 0 ? 1 : -1;
-        const distance = 60;
-        gsap.fromTo(
-          img,
-          { y: -distance * direction },
-          {
-            y: distance * direction,
-            ease: "power1.out",
-            scrollTrigger: {
-              trigger: heroRef.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-            },
-          }
-        );
-      });
+      // document.querySelectorAll(".img").forEach((img, index) => {
+      //   const direction = index % 2 === 0 ? 1 : -1;
+      //   const distance = 60;
+      //   gsap.fromTo(
+      //     img,
+      //     { y: -distance * direction },
+      //     {
+      //       y: distance * direction,
+      //       ease: "power1.out",
+      //       scrollTrigger: {
+      //         trigger: heroRef.current,
+      //         start: "top bottom",
+      //         end: "bottom top",
+      //         scrub: 1,
+      //         anticipatePin: 1,
+      //         invalidateOnRefresh: true,
+      //       },
+      //     }
+      //   );
+      // });
     }, heroRef);
 
     return () => ctx.revert();

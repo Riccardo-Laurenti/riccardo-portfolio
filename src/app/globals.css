@@ -311,6 +311,7 @@ nav a{color: white; text-decoration: none;}
   display: flex;
   flex-wrap: nowrap;
   height: 100vh;
+  display: none;
 }
 
 .slide {
