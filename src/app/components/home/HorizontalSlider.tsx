@@ -22,14 +22,14 @@ export default function HorizontalSlider({ projects }: { projects: Project[] }) 
 
       gsap.to(sections, {
         xPercent: -100 * (sections.length - 1),
-        ease: "none",  
+        ease: "power1.out",
         scrollTrigger: {
         trigger: sliderRef.current,
         pin: mainRef.current,
         scrub: 1,
         pinSpacing: true,
         anticipatePin: 1,          
-        end: () => "+=" + sliderRef.current!.offsetWidth, 
+        end: () => "+=" + (window.innerWidth * sections.length),
         invalidateOnRefresh: true,  
     },
       });

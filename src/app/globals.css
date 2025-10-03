@@ -177,6 +177,8 @@ nav a{color: white; text-decoration: none;}
   height: 100%;
   display: block;
   z-index: 1;
+  will-change: transform;   
+  transform: translateZ(0);
 }
 
 
@@ -184,11 +186,11 @@ nav a{color: white; text-decoration: none;}
   position: relative;
   width: 100%;
   height: 100vh;
+  height: 100dvh; 
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  
 }
 
 .hero-title {
@@ -259,9 +261,7 @@ nav a{color: white; text-decoration: none;}
   .hero-title {
     font-size: 1.4rem;
   }
-  .horizontal-sliders {
-  height: 100dvh;
-}
+
 }
 
 .main {
@@ -322,12 +322,10 @@ nav a{color: white; text-decoration: none;}
 }
 
 
+
 .portfolio-image {
   object-fit: cover;
 }
-
-
-
 
 
 
