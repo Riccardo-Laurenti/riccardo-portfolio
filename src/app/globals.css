@@ -1,6 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-/* 
+
 html {
   scroll-behavior: smooth;
   backface-visibility: hidden;
@@ -16,9 +16,9 @@ body {
     margin: 0;
     background-color: #000000; 
     color: white;
-} */
+}
 
-html {
+/* html {
 
   backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
@@ -53,7 +53,7 @@ body {
   margin: 0;
   background-color: #000000;
   color: white;
-}
+} */
 
 .header {
   position: fixed;
@@ -401,37 +401,7 @@ nav a{color: white; text-decoration: none;}
 /* TAG REEL */ 
 
 
-.cb-tagreel {
-  margin-inline: -2rem;
-  width: calc(100% + 4rem);
-  overflow: hidden; 
-}
-
-.cb-tagreel-content {
-  padding-block: 4rem;
-}
-
-.cb-tagreel-items {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem; 
-}
-
-.cb-tagreel-row {
-  display: flex;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  width: max-content; 
-  gap: 4rem; 
-}
-
-.cb-tagreel-item {
-  flex: 0 0 auto;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  text-transform: uppercase;
-  font-weight: 600;
-  line-height: 1;
-}
+.cb-tagreel { margin-left: -2rem; margin-right: -2rem; width: calc(100% + 4rem); } .cb-tagreel-content { padding: 4rem 0; } .cb-tagreel-items { overflow: hidden; } .cb-tagreel-row { display: flex; flex-wrap: nowrap; white-space: nowrap; width: max-content; } .cb-tagreel-item { flex: 0 0 auto; padding: 1rem 3rem; font-size: clamp(1.5rem, 3vw, 2.5rem); text-transform: uppercase; font-weight: 600; }
 
 
 
