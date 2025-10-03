@@ -115,7 +115,7 @@ export default function HeroSection() {
     scene.add(particles);
 
   const onWindowResize = () => {
-  if (window.innerWidth > 768) { // 👈 aggiorna solo su desktop
+  if (window.innerWidth > 768) { 
     const newWidth = window.innerWidth;
     const newHeight = document.documentElement.clientHeight;
     camera.aspect = newWidth / newHeight;

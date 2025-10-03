@@ -310,10 +310,6 @@ nav a{color: white; text-decoration: none;}
 .slide {
   will-change: transform;
   flex: 0 0 100vw;  
-  /* position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center; */
 }
 
 
@@ -396,7 +392,23 @@ nav a{color: white; text-decoration: none;}
 /* TAG REEL */ 
 
 
-.cb-tagreel { margin-left: -2rem; margin-right: -2rem; width: calc(100% + 4rem); } .cb-tagreel-content { padding: 4rem 0; } .cb-tagreel-items { overflow: hidden; } .cb-tagreel-row { display: flex; flex-wrap: nowrap; white-space: nowrap; width: max-content; } .cb-tagreel-item { flex: 0 0 auto; padding: 1rem 3rem; font-size: clamp(1.5rem, 3vw, 2.5rem); text-transform: uppercase; font-weight: 600; }
+.cb-tagreel { margin-left: -2rem; margin-right: -2rem; width: calc(100% + 4rem); } 
+
+.cb-tagreel-content { padding: 4rem 0; }
+
+ .cb-tagreel-items { overflow: hidden;position: relative; } 
+
+ .cb-tagreel-row {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  width: max-content;
+  transform: translate3d(0,0,0); 
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+ .cb-tagreel-item { flex: 0 0 auto; padding: 1rem 3rem; font-size: clamp(1.5rem, 3vw, 2.5rem); text-transform: uppercase; font-weight: 600; }
 
 
 
