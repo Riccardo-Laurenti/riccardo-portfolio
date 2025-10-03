@@ -8,43 +8,32 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function MediaText() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const imgRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-  
-      gsap.fromTo(
-        ".media-image-1",
-        { y: -80 },
-        {
-          y: 80,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        }
-      );
+      // ✅ Parallax immagini
+      imgRefs.current.forEach((img, i) => {
+        if (!img) return;
 
+        gsap.fromTo(
+          img,
+          { y: i === 0 ? -80 : 80 },
+          {
+            y: i === 0 ? 80 : -80,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      });
 
-      gsap.fromTo(
-        ".media-image-2",
-        { y: 80 },
-        {
-          y: -80,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        }
-      );
-
-      // Parallax testi
+      // ✅ Parallax + entrata testi (puoi lasciarli con le classi)
       gsap.fromTo(
         ".media-text h2",
         { y: 100, opacity: 0 },
@@ -82,49 +71,42 @@ export default function MediaText() {
   }, []);
 
   return (
-
     <section ref={sectionRef} className="media-text-section">
-  <div className="media-wrapper">
+      <div className="media-wrapper">
+        {/* BLOCCO IMMAGINI */}
+        <div className="media-images">
+          {[1, 2].map((i) => (
+            <div
+              key={i}
+              className="media-image-wrapper"
+              ref={(el) => {
+                imgRefs.current[i - 1] = el;
+              }}
+            >
+              <Image
+                src={`/img/work-${i}.webp`}
+                alt={`Progetto creativo ${i}`}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="media-image"
+              />
+            </div>
+          ))}
+        </div>
 
- 
-    <div className="media-images">
-      <div className="media-image-wrapper">
-        <Image
-          src="/img/work-3.webp"
-          alt="Progetto creativo 1"
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="media-image media-image-1"
-        />
+        {/* BLOCCO TESTO */}
+        <div className="media-text">
+          <h2>Esperienze digitali uniche</h2>
+          <p>
+            Creiamo siti web performanti con design su misura, animazioni curate
+            e interazioni fluide per dare vita alla tua identità digitale.
+          </p>
+          <p>
+            Ogni dettaglio è studiato per generare emozione, autorevolezza e
+            conversioni concrete.
+          </p>
+        </div>
       </div>
-
-      <div className="media-image-wrapper">
-        <Image
-          src="/img/work-2.webp"
-          alt="Progetto creativo 2"
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="media-image media-image-2"
-        />
-      </div>
-    </div>
-
-  
-    <div className="media-text">
-      <h2>Esperienze digitali uniche</h2>
-      <p>
-        Creiamo siti web performanti con design su misura, animazioni curate
-        e interazioni fluide per dare vita alla tua identità digitale.
-      </p>
-      <p>
-        Ogni dettaglio è studiato per generare emozione, autorevolezza e
-        conversioni concrete.
-      </p>
-    </div>
-    
-  </div>
-</section>
-
-    
+    </section>
   );
 }
