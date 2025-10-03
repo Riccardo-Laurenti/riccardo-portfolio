@@ -185,13 +185,14 @@ nav a{color: white; text-decoration: none;}
 .hero {
   position: relative;
   width: 100%;
-  height: 100vh;
-  height: 100dvh; 
+  height: 100vh; 
+  height: 100dvh;  
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
+
 
 .hero-title {
   z-index: 3;
