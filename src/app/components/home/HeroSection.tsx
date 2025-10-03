@@ -60,23 +60,30 @@ export default function HeroSection() {
 
 
 
+    const scene = new THREE.Scene();
 
-    let scene = new THREE.Scene();
-    let camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+    const camera = new THREE.PerspectiveCamera(
+      60,
+      window.innerWidth / document.documentElement.clientHeight, // 👈 più stabile su mobile
+      1,
+      1000
+    );
     camera.position.set(0, 100, 260);
+    camera.lookAt(0, 0, 0); // 👈 chiamato una sola volta
 
-    let renderer = new THREE.WebGLRenderer({
-      canvas: canvasRef.current,
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvasRef.current!,
       antialias: true,
       alpha: true,
     });
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const width = window.innerWidth;
+    const height = document.documentElement.clientHeight;
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // 👈 meno aggressivo
 
     const clock = new THREE.Clock();
     const noise = new ImprovedNoise();
-
 
     const gridSize = 350;
     const separation = 5;
@@ -90,7 +97,6 @@ export default function HeroSection() {
     }
 
     geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
-
 
     const circleTexture = new THREE.TextureLoader().load(
       "https://threejs.org/examples/textures/sprites/disc.png"
@@ -108,25 +114,24 @@ export default function HeroSection() {
     const particles = new THREE.Points(geometry, material);
     scene.add(particles);
 
- 
     const onWindowResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      const newWidth = window.innerWidth;
+      const newHeight = document.documentElement.clientHeight; // 👈 meglio di innerHeight su mobile
+      camera.aspect = newWidth / newHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(newWidth, newHeight);
     };
     window.addEventListener("resize", onWindowResize);
 
- 
     const animate = () => {
       requestAnimationFrame(animate);
 
-      const time = clock.getElapsedTime() * 0.35; 
+      const time = clock.getElapsedTime() * 0.35;
       const pos = particles.geometry.attributes.position.array as Float32Array;
 
       let i = 0;
       for (let x = -gridSize / 2; x < gridSize / 2; x += separation) {
         for (let z = -gridSize / 2; z < gridSize / 2; z += separation) {
-      
           const n = noise.noise(x * 0.02, z * 0.02, time * 0.4) * 18;
 
           pos[i + 1] =
@@ -140,13 +145,10 @@ export default function HeroSection() {
       }
 
       particles.geometry.attributes.position.needsUpdate = true;
-
-      camera.lookAt(scene.position);
-      renderer.render(scene, camera);
+      renderer.render(scene, camera); // 👈 tolto camera.lookAt ad ogni frame
     };
 
     animate();
-
 
     return () => {
       ctx.revert();
@@ -155,6 +157,7 @@ export default function HeroSection() {
       material.dispose();
       renderer.dispose();
     };
+
   }, []);
 
   return (
