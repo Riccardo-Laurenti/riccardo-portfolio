@@ -13,28 +13,23 @@ export default function TagReel({
   const reelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-  const ctx = gsap.context(() => {
-    const rows = gsap.utils.toArray<HTMLDivElement>(".cb-tagreel-row");
+    const ctx = gsap.context(() => {
+      const rows = gsap.utils.toArray<HTMLDivElement>(".cb-tagreel-row");
 
-    rows.forEach((row, i) => {
-      const distance = row.offsetWidth / 2; // metà della row, perché è duplicata
-      const speed = 100; // pixel per secondo → regola qui
+      rows.forEach((row, i) => {
+        const duration = 15 * (i + 1); 
 
-      gsap.to(row, {
-        x: -distance,
-        ease: "none",
-        duration: distance / speed, // durata calcolata dinamicamente
-        repeat: -1,
-        modifiers: {
-          x: (x) => `${parseFloat(x) % -distance}px`, // loop perfetto
-        },
+        gsap.to(row, {
+          xPercent: -50, 
+          ease: "none",
+          duration,
+          repeat: -1,
+        });
       });
-    });
-  }, reelRef);
+    }, reelRef);
 
-  return () => ctx.revert();
-}, []);
-
+    return () => ctx.revert();
+  }, []);
 
 
   const doubledItems = [...items, ...items];
