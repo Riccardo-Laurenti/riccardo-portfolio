@@ -15,14 +15,14 @@ export default function HeroSection() {
   useEffect(() => {
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
+      const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1 } });
 
       gsap.set(".reveal-line span", { y: "100%" });
 
       tl.to(".reveal-line span", {
         y: 0,
-        delay: 1,
-        duration: 2,
+        delay: 0.8,
+        duration: 0.8,
         ease: "power4.out",
         stagger: 0.15,
       });
@@ -33,27 +33,49 @@ export default function HeroSection() {
       tl.from(".img-4", { y: 200, rotate: 10, opacity: 0, scale: 0.9 }, "-=1.2");
 
 
-      const parallaxImgs = document.querySelectorAll(".img");
+      // const parallaxImgs = document.querySelectorAll(".img");
 
-      parallaxImgs.forEach((img, index) => {
-        img.classList.add("gsap-visible");
-        const direction = index % 2 === 0 ? 1 : -1;
-        const distance = 60;
-        gsap.fromTo(
-          img,
-          { y: -distance * direction },
-          {
-            y: distance * direction,
-            ease: "none",
-            scrollTrigger: {
-              trigger: heroRef.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-      });
+      // parallaxImgs.forEach((img, index) => {
+      //   img.classList.add("gsap-visible");
+      //   const direction = index % 2 === 0 ? 1 : -1;
+      //   const distance = 60;
+      //   gsap.fromTo(
+      //     img,
+      //     { y: -distance * direction },
+      //     {
+      //       y: distance * direction,
+      //       ease: "none",
+      //       scrollTrigger: {
+      //         trigger: heroRef.current,
+      //         start: "top bottom",
+      //         end: "bottom top",
+      //         scrub: true,
+      //       },
+      //     }
+      //   );
+      // });
+      const parallaxImgs = gsap.utils.toArray<HTMLElement>(".img");
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      })
+      .fromTo(
+        parallaxImgs,
+        {
+          y: (i) => (i % 2 === 0 ? -60 : 60), 
+        },
+        {
+          y: (i) => (i % 2 === 0 ? 60 : -60),
+          ease: "none",
+        },
+        0 
+      );
+
 
       ScrollTrigger.refresh();
     }, heroRef);

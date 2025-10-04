@@ -11,69 +11,62 @@ export default function MediaText() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const imgRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // ✅ Parallax immagini
-      imgRefs.current.forEach((img, i) => {
-        if (!img) return;
+useEffect(() => {
+  const ctx = gsap.context(() => {
 
-        gsap.fromTo(
-          img,
-          { y: i === 0 ? -80 : 80 },
-          {
-            y: i === 0 ? 80 : -80,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-      });
 
-      // ✅ Parallax + entrata testi (puoi lasciarli con le classi)
-      gsap.fromTo(
-        ".media-text h2",
-        { y: 100, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            end: "bottom 60%",
-            scrub: true,
-          },
-        }
-      );
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    })
+    .fromTo(imgRefs.current, {
+      y: (i) => (i === 0 ? -80 : 80),
+    }, {
+      y: (i) => (i === 0 ? 80 : -80),
+      ease: "none",
+    });
 
-      gsap.fromTo(
-        ".media-text p",
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 70%",
-            end: "bottom 50%",
-            scrub: true,
-          },
-        }
-      );
-    }, sectionRef);
+gsap.from(".media-text h2", {
+  y: 60,
+  opacity: 0,
+  ease: "power3.out",
+  duration: 1.2,
+  scrollTrigger: {
+    trigger: sectionRef.current,
+    start: "top 80%",
+    toggleActions: "play none none reverse", 
+  },
+});
 
-    return () => ctx.revert();
-  }, []);
+gsap.from(".media-text p", {
+  y: 40,
+  opacity: 0,
+  ease: "power3.out",
+  duration: 1,
+  stagger: 0.2,
+  scrollTrigger: {
+    trigger: sectionRef.current,
+    start: "top 85%",
+    toggleActions: "play none none reverse",
+  },
+});
+
+
+    ScrollTrigger.refresh();
+  }, sectionRef);
+
+  return () => ctx.revert();
+}, []);
+
 
   return (
     <section ref={sectionRef} className="media-text-section">
       <div className="media-wrapper">
-        {/* BLOCCO IMMAGINI */}
+
         <div className="media-images">
           {[1, 2].map((i) => (
             <div
