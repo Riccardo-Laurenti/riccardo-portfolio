@@ -1,7 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-html {
+/* html {
   scroll-behavior: smooth;
 
 }
@@ -15,9 +15,9 @@ body {
     margin: 0;
     background-color: #000000; 
     color: white;
-}
+} */
 
-/* html {
+html {
 
   backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
@@ -52,7 +52,7 @@ body {
   margin: 0;
   background-color: #000000;
   color: white;
-} */
+}
 
 .header {
   position: fixed;
@@ -300,22 +300,7 @@ nav a{color: white; text-decoration: none;}
 
 /* HORIZONTAL SLIDER */
 
-/* .horizontal-sliders {
-  display: flex;
-  flex-wrap: nowrap;
-  height: 100svh;
-}
 
-.slide {
-  will-change: transform;
-  flex: 0 0 100vw;  
-}
-
-
-
-.portfolio-image {
-  object-fit: cover;
-} */
 
 .horizontal-sliders {
   display: flex;

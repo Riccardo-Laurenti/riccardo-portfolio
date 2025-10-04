@@ -32,28 +32,6 @@ export default function HeroSection() {
       tl.from(".img-3", { y: 200, rotate: -10, opacity: 0, scale: 0.9 }, "-=1.2");
       tl.from(".img-4", { y: 200, rotate: 10, opacity: 0, scale: 0.9 }, "-=1.2");
 
-
-      // const parallaxImgs = document.querySelectorAll(".img");
-
-      // parallaxImgs.forEach((img, index) => {
-      //   img.classList.add("gsap-visible");
-      //   const direction = index % 2 === 0 ? 1 : -1;
-      //   const distance = 60;
-      //   gsap.fromTo(
-      //     img,
-      //     { y: -distance * direction },
-      //     {
-      //       y: distance * direction,
-      //       ease: "none",
-      //       scrollTrigger: {
-      //         trigger: heroRef.current,
-      //         start: "top bottom",
-      //         end: "bottom top",
-      //         scrub: true,
-      //       },
-      //     }
-      //   );
-      // });
       const parallaxImgs = gsap.utils.toArray<HTMLElement>(".img");
 
       gsap.timeline({
@@ -86,12 +64,12 @@ export default function HeroSection() {
 
     const camera = new THREE.PerspectiveCamera(
       60,
-      window.innerWidth / document.documentElement.clientHeight, // 👈 più stabile su mobile
+      window.innerWidth / document.documentElement.clientHeight, 
       1,
       1000
     );
     camera.position.set(0, 100, 260);
-    camera.lookAt(0, 0, 0); // 👈 chiamato una sola volta
+    camera.lookAt(0, 0, 0); 
 
     const renderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current!,
@@ -102,7 +80,7 @@ export default function HeroSection() {
     const width = window.innerWidth;
     const height = document.documentElement.clientHeight;
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // 👈 meno aggressivo
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); 
 
     const clock = new THREE.Clock();
     const noise = new ImprovedNoise();
@@ -170,7 +148,7 @@ export default function HeroSection() {
       }
 
       particles.geometry.attributes.position.needsUpdate = true;
-      renderer.render(scene, camera); // 👈 tolto camera.lookAt ad ogni frame
+      renderer.render(scene, camera); 
     };
 
     animate();
